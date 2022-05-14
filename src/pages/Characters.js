@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import Cookie from "js-cookie";
 import Card from "../components/Card";
 
 const Characters = (props) => {
@@ -22,16 +20,29 @@ const Characters = (props) => {
 
   useEffect(() => {
     try {
+      const fetchData = async () => {
+        const response = await axios.get(
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
+        );
+        setCharacters(response.data.results);
+        setIsLoading(false);
+      };
       fetchData();
     } catch (error) {
       console.log(error);
     }
   }, [search]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, fetchData) => {
     e.preventDefault();
-    console.log("search", search);
     try {
+      const fetchData = async () => {
+        const response = await axios.get(
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
+        );
+        setCharacters(response.data.results);
+        setIsLoading(false);
+      };
       fetchData();
     } catch (error) {
       console.log(error);

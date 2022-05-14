@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cookie from "js-cookie";
 import Card from "../components/Card";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +12,7 @@ const Comics = () => {
   const [favoritesComics, setFavoritesComics] = useState("");
 
   const [countData, setCountData] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  //const [currentPage, setCurrentPage] = useState(1);
 
   // TEST
   // console.log("response", response);
@@ -22,7 +21,7 @@ const Comics = () => {
   // console.log('skip', skip);
   // console.log('countData', countData);
 
-  const limitComics = 100;
+  //const limitComics = 100;
   const skip = 0;
   const fetchData = async () => {
     // const skip = currentPage > 1 ? (currentPage * limitComics - limitComics) : 0;
