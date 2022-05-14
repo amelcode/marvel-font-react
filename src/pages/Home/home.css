@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+.page-home {
+    font-family: "Marvel";
+    font-weight: 700;
+}
+
+.home-welcome h1 {
+    width: 65vh;
+    padding: 1rem;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    line-height: 5vh;
+    font-weight: bolder;
+    font-size: 4rem;
+    background-color: red;
+}
+
+.home-comics,
+.home-characters {
+    position: relative;
+    height: 35vh;
+    max-width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 35vh;
+    box-shadow: 0 6px 6px -6px #000;
+}
+
+.home-comics {
+    margin-bottom: 2rem;
+}
+.home-characters {
+    margin-top: 2rem;
+}
+
+.home-comics a,
+.home-characters a {
+    font-size: 10em;
+    color: #fff;
+}
+
+.home-comics img,
+.home-characters img {
+    height: 35vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cover-image {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 35vh;
+    color: #fff;
+    background: rgba(70, 68, 68, 0.8);
+}
+
+@media screen and (max-width: 768px) {
+
+    .home-welcome h1 {
+        font-size: 3rem;
+        max-width: fit-content;
+    }
+    .home-comics,
+    .home-characters {
+        height: 25vh;
+    }
+    .home-comics a,
+    .home-characters a {
+        font-size: 5em;
+        line-height: 25vh;
+    }
+    .home-comics img,
+    .home-characters img {
+        height: 25vh;
+    }
+    .cover-image {
+        height: 25vh;
+    }
+}

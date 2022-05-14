@@ -1,38 +1,104 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  font-family: "Marvel";
+  color: #fff;
+  background-color: #202020;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+input:focus { 
+  outline: none !important;
+  border-color: none;
+
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  line-height: 1.5rem;
+  background-color: #202020;
+  margin-bottom: 1rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  font-size: 1.25rem;
+}
+.App-nav-first {
+  justify-content: space-between;
+  padding: 1rem;
+}
+.App-logo {
+  height: 2.5rem;
+}
+
+.App-user-navigation {
+  width: 15rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.App-user-navigation a,
+.App-user-navigation button {
+  background-color: #f3f3f3;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  color: #ec1c23;
+  font-size: 0.9rem;
+  font-weight: bolder;
+}
+
+.App-nav-second {
+  justify-content: center;
+  padding: 1rem 0;
+  border-top: #757575 solid 0.1rem;
+  border-bottom: #757575 solid 0.1rem;
+  background-color: #333333;
+}
+.App-nav-second a {
+  margin: 0 1rem;
+}
+h1 {
+  font-size: 5rem;
+  font-weight: bolder;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-search {
+  width: max-content;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin: 2rem auto;
+  border-bottom: #757575 solid 0.1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.form-search input, .form-search div {
+  background-color: inherit;
+  color: #fff;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  cursor: pointer;
+  padding: 0.4rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-search input:nth-child(3) {
+  border-top: none;
 }
