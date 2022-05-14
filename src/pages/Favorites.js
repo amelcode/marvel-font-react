@@ -7,23 +7,23 @@ const Favorites = (props) => {
   const [favoritesComics, setFavoritesComics] = useState(null);
   const [favoritesCharacters, setFavoritesCharacters] = useState(null);
 
-
   const fetchData = async () => {
-    const response = await axios.get(`http://localhost:3200/favorites`);
+    const response = await axios.get(
+      `https://marvel-back-express.herokuapp.com/favorites`
+    );
     // console.log("response", response);
     setIsLoading(false);
     setFavoritesComics(response.data.comics);
     setFavoritesCharacters(response.data.characters);
   };
 
-  const fetchDataComics = async (title) => {      
-
+  const fetchDataComics = async (title) => {
     const response = await axios.get(
-      `http://localhost:3200/comics?title=${title}`
-      );
-      
-    console.log('response fetchDataComics', response);
-    console.log('response fetchDataComics', response.data);
+      `https://marvel-back-express.herokuapp.com/comics?title=${title}`
+    );
+
+    console.log("response fetchDataComics", response);
+    console.log("response fetchDataComics", response.data);
     // setComics(response.data.results);
     // setCountData(response.data.count);
     setIsLoading(false);
@@ -63,8 +63,7 @@ const Favorites = (props) => {
       <h1>favorites</h1>
       <h2>Comics</h2>
       {favoritesComics.map((title) => {
-
-        fetchDataComics(title)
+        fetchDataComics(title);
         return (
           <div key={title}>
             <p>{title}</p>
@@ -73,14 +72,12 @@ const Favorites = (props) => {
       })}
       <h2>Characters</h2>
       {favoritesCharacters.map((character) => {
-
         return (
           <div key={character}>
             <p>{character}</p>
           </div>
         );
       })}
-      
     </div>
   );
 };

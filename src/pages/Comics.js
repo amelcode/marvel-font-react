@@ -3,8 +3,7 @@ import axios from "axios";
 import Cookie from "js-cookie";
 import Card from "../components/Card";
 
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import Pagination from "../components/Pagination";
 const Comics = () => {
@@ -29,7 +28,7 @@ const Comics = () => {
     // const skip = currentPage > 1 ? (currentPage * limitComics - limitComics) : 0;
 
     const response = await axios.get(
-      `http://localhost:3200/comics?skip=${skip}&title=${search}`
+      `https://marvel-back-express.herokuapp.com/comics?skip=${skip}`
     );
 
     console.log("response", response);
@@ -63,7 +62,9 @@ const Comics = () => {
       <h1>Comics</h1>
       {/* <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} /> */}
       <form className="form-search" onSubmit={handleSubmit}>
-      <div><FontAwesomeIcon icon="fa-solid fa-magnifying-glass" /></div>
+        <div>
+          <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+        </div>
         <input
           type="search"
           name="search"

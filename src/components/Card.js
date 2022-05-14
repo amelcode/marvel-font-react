@@ -8,21 +8,26 @@ const Card = ({
   name,
   description,
   imageLink,
-  imageExtension, 
+  imageExtension,
   setFavoritesComics,
   objFav,
 }) => {
-//Pour mettre que l'élément est en favorie et qu'il ne puisse plus l'etre mais implique de récupérer les données de bdd et de les mettre dans le state de l'app pour ensuite a l'affichage indiquer ceux qui sont en fav et ceux qui ne le sont pas
+  //Pour mettre que l'élément est en favorie et qu'il ne puisse plus l'etre mais implique de récupérer les données de bdd et de les mettre dans le state de l'app pour ensuite a l'affichage indiquer ceux qui sont en fav et ceux qui ne le sont pas
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoritesMessage, setFavoritesMessage] = useState("");
-  const tokenExists = Cookies.get("marvel-user-token") ? Cookies.get("marvel-user-token") : false;
+  const tokenExists = Cookies.get("marvel-user-token")
+    ? Cookies.get("marvel-user-token")
+    : false;
 
   const regiterFavorites = async (token, favorites) => {
-    const response = await axios.put(`http://localhost:3200/addFavorits`, {
-      token: token,
-      favorites,
-    });
+    const response = await axios.put(
+      `https://marvel-back-express.herokuapp.com/addFavorits`,
+      {
+        token: token,
+        favorites,
+      }
+    );
     console.log("response", response);
     setIsFavorite(true);
     setFavoritesMessage(response.data.message);
@@ -30,9 +35,11 @@ const Card = ({
 
   return (
     <div className="card" key={id}>
-
       <img
-        src={imageLink.includes("image_not_available") || imageLink ===  "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708"
+        src={
+          imageLink.includes("image_not_available") ||
+          imageLink ===
+            "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708"
             ? imageAvailable
             : `${imageLink}/portrait_uncanny.${imageExtension}`
         }
@@ -58,11 +65,9 @@ const Card = ({
           regiterFavorites(tokenExists, objFav);
         }}
       >
-        {isFavorite ? favoritesMessage: "Add Favorite"}
+        {isFavorite ? favoritesMessage : "Add Favorite"}
       </button>
-      <div className="card-favorites-message">
-        
-      </div>
+      <div className="card-favorites-message"></div>
     </div>
   );
 };

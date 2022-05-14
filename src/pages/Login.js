@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookie from "js-cookie";
 
-export default function Login({setToken}) {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export default function Login({setToken}) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3200/login",
+        "https://marvel-back-express.herokuapp.com/login",
         {
           email: email,
           password: password,
@@ -32,8 +32,7 @@ export default function Login({setToken}) {
       Cookie.set("marvel-user-token", response.data.token);
       setToken(response.data.token);
 
-      navigate("/")
-      
+      navigate("/");
     } catch (error) {
       setError(true);
     }
@@ -42,7 +41,7 @@ export default function Login({setToken}) {
   return (
     <div className="page-login">
       <form onSubmit={submission}>
-      {error && <p>Incorrect username or password</p>}
+        {error && <p>Incorrect username or password</p>}
         <input
           type="email"
           name="email"

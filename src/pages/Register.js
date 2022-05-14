@@ -39,11 +39,14 @@ export default function Signup({ setToken }) {
         throw new Error("Passwords do not match");
       }
 
-      const response = await axios.post("http://localhost:3200/register", {
-        username: username,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://marvel-back-express.herokuapp.com/register",
+        {
+          username: username,
+          email: email,
+          password: password,
+        }
+      );
 
       Cookie.set("marvel-user-token", response.data.token);
       setToken(response.data.token);

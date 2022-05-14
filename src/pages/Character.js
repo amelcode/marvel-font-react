@@ -13,7 +13,7 @@ const Character = () => {
 
   const fetchDataComics = async () => {
     const response = await axios.get(
-      `http://localhost:3200/comics/${characterId}`
+      `https://marvel-back-express.herokuapp.com/comics/${characterId}`
     );
     console.log("response fetchDataComics", response);
     console.log("response.data", response.data);
@@ -32,13 +32,10 @@ const Character = () => {
   // console.log('character', character);
 
   return isLoading ? (
-    
-
-
     <p ref={divRef}>En cours de chargement</p>
   ) : (
     <>
-      <div  className="page-character">
+      <div className="page-character">
         <h1>{dataCharacter.name}</h1>
 
         <img

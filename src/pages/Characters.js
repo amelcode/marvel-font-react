@@ -14,7 +14,7 @@ const Characters = (props) => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `http://localhost:3200/characters?skip=${skip}&name=${search}`
+      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
     );
     setCharacters(response.data.results);
     setIsLoading(false);
