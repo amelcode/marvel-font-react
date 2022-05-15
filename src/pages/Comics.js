@@ -3,6 +3,7 @@ import axios from "axios";
 import Card from "../components/Card";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "../components/Loading";
 
 // import Pagination from "../components/Pagination";
 const Comics = () => {
@@ -58,8 +59,8 @@ const Comics = () => {
   };
 
   return isLoading ? (
-    <p>En cours de chargement</p>
-  ) : (
+    <Loading/>
+    ) : (
     <div className="page-comics">
       <h1>Comics</h1>
       {/* <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} /> */}

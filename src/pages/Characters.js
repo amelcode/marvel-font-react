@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "../components/Loading";
 
 const Characters = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +67,7 @@ const Characters = (props) => {
   };
 
   return isLoading ? (
-    <p>En cours de chargement</p>
+   <Loading/>
   ) : (
     <div className="page-characters">
       <h1>Character</h1>
