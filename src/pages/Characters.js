@@ -14,10 +14,10 @@ const Characters = (props) => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}`,
       {
         headers: {
-          "Access-Control-Allow-Origin": false,
+          "Access-Control-Allow-Origin": true,
         },
       }
     );
@@ -29,10 +29,10 @@ const Characters = (props) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}`,
           {
             headers: {
-              "Access-Control-Allow-Origin": false,
+              "Access-Control-Allow-Origin": true,
             },
           }
         );
@@ -53,7 +53,7 @@ const Characters = (props) => {
           `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
           {
             headers: {
-              "Access-Control-Allow-Origin": false,
+              "Access-Control-Allow-Origin": true,
             },
           }
         );
