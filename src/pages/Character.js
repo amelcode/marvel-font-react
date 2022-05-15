@@ -13,7 +13,10 @@ const Character = () => {
 
   const fetchDataComics = async () => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/comics/${characterId}`
+      `https://marvel-back-express.herokuapp.com/comics/${characterId}`,
+      {headers: {
+        'Access-Control-Allow-Origin': true,
+      },}
     );
     console.log("response fetchDataComics", response);
     console.log("response.data", response.data);

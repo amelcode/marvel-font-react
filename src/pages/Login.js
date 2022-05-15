@@ -40,25 +40,31 @@ export default function Login({ setToken }) {
 
   return (
     <div className="page-login">
-      <form onSubmit={submission}>
-        {error && <p>Incorrect username or password</p>}
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Adresse email"
-          onChange={onChangeEmail}
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Mot de passe"
-          onChange={onChangePassword}
-        />
-        <input type="submit" value="Se connecter" />
-      </form>
-      <Link to="/signup">Pas encore de compte ? Inscris-toi !</Link>
+      <div className="page-login-block-image"></div>
+      <div className="page-login-block-form">
+        <h2>Login</h2>
+        <form className="form-user" onSubmit={submission}>
+          {error && <p>Incorrect username or password</p>}
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={onChangeEmail}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={onChangePassword}
+          />
+          <input type="submit" value="Login" />
+        </form>
+        <Link className="form-user-link" to="/register">No account yet? Register yourself !</Link>
+      </div>
     </div>
   );
 }

@@ -27,7 +27,10 @@ const Comics = () => {
     // const skip = currentPage > 1 ? (currentPage * limitComics - limitComics) : 0;
 
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/comics?skip=${skip}`
+      `https://marvel-back-express.herokuapp.com/comics?skip=${skip}&title=${search}`,
+      {headers: {
+        'Access-Control-Allow-Origin': true,
+      },}
     );
 
     console.log("response", response);

@@ -49,6 +49,7 @@ function App() {
           </nav>
 
           <nav className="App-nav App-nav-second">
+            <Link to="/">Home</Link>
             <Link to="/comics">Comics</Link>
             <Link to="/characters">Character</Link>
             {token && <Link to="/favorites">Favorites</Link>}

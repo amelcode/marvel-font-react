@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Characters = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,12 @@ const Characters = (props) => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
+      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": true,
+        },
+      }
     );
     setCharacters(response.data.results);
     setIsLoading(false);
@@ -22,7 +28,12 @@ const Characters = (props) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": true,
+            },
+          }
         );
         setCharacters(response.data.results);
         setIsLoading(false);
@@ -38,7 +49,12 @@ const Characters = (props) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": true,
+            },
+          }
         );
         setCharacters(response.data.results);
         setIsLoading(false);
@@ -54,7 +70,10 @@ const Characters = (props) => {
   ) : (
     <div className="page-characters">
       <h1>Character</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="form-search" onSubmit={handleSubmit}>
+        <div>
+          <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+        </div>
         <input
           type="search"
           name="search"
@@ -66,7 +85,7 @@ const Characters = (props) => {
             console.log("search", search);
           }}
         />
-        <input type="submit" value="search" />
+        <input type="submit" value="Search" />
       </form>
 
       <div className="containe-card">
@@ -76,7 +95,6 @@ const Characters = (props) => {
               key={character._id}
               id={character._id}
               name={character.name}
-              // description={comic.description}
               imageLink={character.thumbnail.path}
               imageExtension={character.thumbnail.extension}
               setFavoritesComics={setFavoritesCharacters}

@@ -9,17 +9,24 @@ a {
   text-decoration: none;
   color: inherit;
 }
-button {
+button,
+input[type="submit"] {
   border: none;
   background-color: inherit;
   color: inherit;
   font-family: inherit;
   font-size: inherit;
 }
-input:focus { 
+input {
+  border: none;
+  background-color: #fff;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+input:focus {
   outline: none !important;
   border-color: none;
-
 }
 
 header {
@@ -89,7 +96,8 @@ h1 {
   border-bottom: #757575 solid 0.1rem;
 }
 
-.form-search input, .form-search div {
+.form-search input,
+.form-search div {
   background-color: inherit;
   color: #fff;
   border-top: none;
@@ -101,4 +109,57 @@ h1 {
 }
 .form-search input:nth-child(3) {
   border-top: none;
+}
+
+.page-login,
+.page-register {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px 5px #757575;
+  align-items: center;
+}
+.page-login-block-image,
+.page-register-block-image {
+  width: 50%;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  background-color: aqua;
+}
+.page-login-block-form,
+.page-login-block-form {
+  width: 50%;
+  margin: 1rem;
+}
+
+.page-login-block-form h2,
+.page-register-block-form h2 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.form-user {
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.form-user label {
+  margin: 1rem 0 0 1rem;
+}
+.form-user input {
+  border-radius: 0.15rem;
+  margin: 0.5rem 1rem 1rem 1rem;
+}
+
+.form-user input[type="submit"] {
+  background-color: #e66c71;
+  color: #fff;
+  font-weight: bolder;
+}
+
+.form-user-link {
+  display: block;
+  text-align: center;
+  margin: 1rem 0;
 }

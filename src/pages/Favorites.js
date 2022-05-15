@@ -9,7 +9,10 @@ const Favorites = (props) => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/favorites`
+      `https://marvel-back-express.herokuapp.com/favorites`,
+      {headers: {
+        'Access-Control-Allow-Origin': true,
+      },}
     );
     // console.log("response", response);
     setIsLoading(false);
@@ -19,7 +22,10 @@ const Favorites = (props) => {
 
   const fetchDataComics = async (title) => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/comics?title=${title}`
+      `https://marvel-back-express.herokuapp.com/comics?title=${title}`,
+      {headers: {
+        'Access-Control-Allow-Origin': true,
+      },}
     );
 
     console.log("response fetchDataComics", response);

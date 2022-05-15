@@ -59,39 +59,48 @@ export default function Signup({ setToken }) {
   };
   return (
     <div className="page-register">
+      <div className="page-register-block-image"></div>
+      <div className="page-register-block-form">
+      <h2>Register</h2>
+
       <p>{error}</p>
-      <form onSubmit={onSubmission}>
+      <form className="form-user" onSubmit={onSubmission}>
+      <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
           value={username}
-          placeholder="Nom de l'utilisateur"
+          placeholder="Username"
           onChange={onChangeUsername}
         />
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
           value={email}
-          placeholder="Adresse email"
+          placeholder="Email"
           onChange={onChangeEmail}
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           value={password}
-          placeholder="Mot de passe"
+          placeholder="Password"
           onChange={onChangePassword}
         />
+        <label htmlFor="confirmPassword">Confirm password</label>
         <input
-          type="password"
-          name="password"
+          type="confirmPassword"
+          name="confirmPassword"
           value={confirmPassword}
-          placeholder="Mot de passe"
+          placeholder="Confirm your password"
           onChange={onChangeConfirmPassword}
         />
         <input type="submit" name="submit" value="Register" />
       </form>
-      <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
+      <Link to="/login">Already have an account? Connect yourself !</Link>
+    </div>
     </div>
   );
 }

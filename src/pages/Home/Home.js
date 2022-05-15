@@ -17,9 +17,7 @@ export default function Home() {
             </Link>
           </div>
         </section>
-        <div className="home-welcome">
-        <h1>Welcome to Marvel Comics</h1>
-      </div>
+
         <section className="home-characters">
           <img src={charactersImage} alt="characters" />
           <div className="cover-image">
