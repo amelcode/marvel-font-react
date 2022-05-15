@@ -120,11 +120,11 @@ h1 {
   box-shadow: 0 0 15px 5px #757575;
   align-items: center;
 }
-.page-login{
+.page-login {
   width: 640px;
   height: 400px;
 }
-.page-register{
+.page-register {
   width: 640px;
   height: 600px;
 }
@@ -177,4 +177,19 @@ h1 {
 .form-user-link span {
   color: #ec1c23;
 }
-/*  background-image: url("https://terrigen-cdn-dev.marvel.com/content/prod/1x/the_darkhold_web_reading_list.jpg");*/
+.page-not-found img {
+  width: 25%;
+  margin: 0 auto;
+  display: block;
+}
+.page-not-found h2{
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+.page-not-found p{
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 0 1rem;
+
+}

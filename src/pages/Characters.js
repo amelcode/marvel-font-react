@@ -17,7 +17,7 @@ const Characters = (props) => {
       `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
       {
         headers: {
-          "Access-Control-Allow-Origin": true,
+          "Access-Control-Allow-Origin": false,
         },
       }
     );
@@ -32,7 +32,7 @@ const Characters = (props) => {
           `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
           {
             headers: {
-              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Origin": false,
             },
           }
         );
@@ -53,7 +53,7 @@ const Characters = (props) => {
           `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
           {
             headers: {
-              "Access-Control-Allow-Origin": true,
+              "Access-Control-Allow-Origin": false,
             },
           }
         );

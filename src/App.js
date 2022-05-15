@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Favorites from "./pages/Favorites";
+import NotFound from "./pages/NotFound";
 
 library.add(faMagnifyingGlass);
 
@@ -37,7 +38,7 @@ function App() {
                     setToken(null);
                   }}
                 >
-                  Deconnexion
+                  Logout
                 </button>
                 
             ) : (
@@ -65,7 +66,7 @@ function App() {
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/profile" element={<Profile token={token} />} />
           <Route path="/favorites" element={<Favorites token={token} />} />
-          <Route path="*" element={<p>Page not found</p>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
