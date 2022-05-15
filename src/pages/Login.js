@@ -41,7 +41,7 @@ export default function Login({ setToken }) {
   return (
     <div className="page-login">
       <div className="page-login-block-image"></div>
-      <div className="page-login-block-form">
+      <div className="page-block-form">
         <h2>Login</h2>
         <form className="form-user" onSubmit={submission}>
           {error && <p>Incorrect username or password</p>}
@@ -63,7 +63,9 @@ export default function Login({ setToken }) {
           />
           <input type="submit" value="Login" />
         </form>
-        <Link className="form-user-link" to="/register">No account yet? Register yourself !</Link>
+        <Link className="form-user-link" to="/register">
+          No account yet? <br/><span>Register yourself !</span>
+        </Link>
       </div>
     </div>
   );

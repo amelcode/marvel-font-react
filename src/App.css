@@ -114,27 +114,37 @@ h1 {
 .page-login,
 .page-register {
   display: flex;
-  width: 50%;
+
   margin: 0 auto;
   border-radius: 0.5rem;
   box-shadow: 0 0 15px 5px #757575;
   align-items: center;
 }
+.page-login{
+  width: 640px;
+  height: 400px;
+}
+.page-register{
+  width: 640px;
+  height: 600px;
+}
 .page-login-block-image,
 .page-register-block-image {
   width: 50%;
+  height: 100%;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  background-color: aqua;
+  background-image: url("https://terrigen-cdn-dev.marvel.com/content/prod/1x/the_darkhold_web_reading_list.jpg");
+  background-size: cover;
+  background-position: center;
 }
-.page-login-block-form,
-.page-login-block-form {
+
+.page-block-form {
   width: 50%;
   margin: 1rem;
 }
 
-.page-login-block-form h2,
-.page-register-block-form h2 {
+.page-block-form h2 {
   text-align: center;
   font-size: 1.5rem;
 }
@@ -150,6 +160,7 @@ h1 {
 .form-user input {
   border-radius: 0.15rem;
   margin: 0.5rem 1rem 1rem 1rem;
+  color: #202020;
 }
 
 .form-user input[type="submit"] {
@@ -163,3 +174,7 @@ h1 {
   text-align: center;
   margin: 1rem 0;
 }
+.form-user-link span {
+  color: #ec1c23;
+}
+/*  background-image: url("https://terrigen-cdn-dev.marvel.com/content/prod/1x/the_darkhold_web_reading_list.jpg");*/

@@ -60,47 +60,49 @@ export default function Signup({ setToken }) {
   return (
     <div className="page-register">
       <div className="page-register-block-image"></div>
-      <div className="page-register-block-form">
-      <h2>Register</h2>
+      <div className="page-block-form">
+        <h2>Register</h2>
 
-      <p>{error}</p>
-      <form className="form-user" onSubmit={onSubmission}>
-      <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          placeholder="Username"
-          onChange={onChangeUsername}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Email"
-          onChange={onChangeEmail}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Password"
-          onChange={onChangePassword}
-        />
-        <label htmlFor="confirmPassword">Confirm password</label>
-        <input
-          type="confirmPassword"
-          name="confirmPassword"
-          value={confirmPassword}
-          placeholder="Confirm your password"
-          onChange={onChangeConfirmPassword}
-        />
-        <input type="submit" name="submit" value="Register" />
-      </form>
-      <Link to="/login">Already have an account? Connect yourself !</Link>
-    </div>
+        <p>{error}</p>
+        <form className="form-user" onSubmit={onSubmission}>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            placeholder="Username"
+            onChange={onChangeUsername}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={onChangeEmail}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={onChangePassword}
+          />
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            placeholder="Confirm your password"
+            onChange={onChangeConfirmPassword}
+          />
+          <input type="submit" name="submit" value="Register" />
+        </form>
+        <Link className="form-user-link" to="/login">
+          Already have an account?<br/><span>Connect yourself !</span>
+        </Link>
+      </div>
     </div>
   );
 }
