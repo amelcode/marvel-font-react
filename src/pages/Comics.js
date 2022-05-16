@@ -1,31 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Pagination from "../components/Pagination";
 import Loading from "../components/Loading";
 
-// import Pagination from "../components/Pagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [comics, setComics] = useState(null);
+  console.log('comics', comics);
   const [search, setSearch] = useState("");
   const [favoritesComics, setFavoritesComics] = useState("");
 
-  const [countData, setCountData] = useState(0);
-  //const [currentPage, setCurrentPage] = useState(1);
+  const [skip, setSkip] = useState(0);
+  const [countData, setCountData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // TEST
-  // console.log("response", response);
-  // console.log("comics", comics);
-  // console.log('search', search);
-  // console.log('skip', skip);
-  // console.log('countData', countData);
 
-  //const limitComics = 100;
-  const skip = 0;
   const fetchData = async () => {
-    // const skip = currentPage > 1 ? (currentPage * limitComics - limitComics) : 0;
 
     const response = await axios.get(
       `https://marvel-back-express.herokuapp.com/comics?skip=${skip}&title=${search}`,
@@ -33,12 +26,9 @@ const Comics = () => {
         'Access-Control-Allow-Origin': true,
       },}
     );
-
-    console.log("response", response);
     setComics(response.data.results);
     setCountData(response.data.count);
     setIsLoading(false);
-    // console.log('countData', countData);
   };
   useEffect(() => {
     try {
@@ -46,7 +36,7 @@ const Comics = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [search]);
+  }, [search, skip]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +53,7 @@ const Comics = () => {
     ) : (
     <div className="page-comics">
       <h1>Comics</h1>
-      {/* <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} /> */}
+
       <form className="form-search" onSubmit={handleSubmit}>
         <div>
           <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
@@ -80,7 +70,8 @@ const Comics = () => {
           }}
         />
         <input type="submit" value="search" />
-      </form>
+      </form>      
+      <Pagination setSkip={setSkip} currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} />
       <div className="containe-card">
         {comics.map((comic) => {
           return (
@@ -95,7 +86,7 @@ const Comics = () => {
               objFav={{ favoritesComics: comic.title }}
             />
           );
-        })}{" "}
+        })}
       </div>
     </div>
   );

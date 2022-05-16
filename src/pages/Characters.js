@@ -3,6 +3,9 @@ import axios from "axios";
 import Card from "../components/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "../components/Loading";
+import Pagination from "../components/Pagination";
+import { Link } from "react-router-dom";
+
 
 const Characters = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +14,9 @@ const Characters = (props) => {
   const [favoritesCharacters, setFavoritesCharacters] = useState("");
 
   const [skip, setSkip] = useState(0);
+  const [countData, setCountData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -20,46 +26,25 @@ const Characters = (props) => {
           "Access-Control-Allow-Origin": true,
         },
       }
-    );
+      );
+      console.log('response chara', response);
     setCharacters(response.data.results);
+    setCountData(response.data.count);
     setIsLoading(false);
   };
+  const limitComics = 100;
 
   useEffect(() => {
     try {
-      const fetchData = async () => {
-        const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": true,
-            },
-          }
-        );
-        setCharacters(response.data.results);
-        setIsLoading(false);
-      };
       fetchData();
     } catch (error) {
       console.log(error);
     }
-  }, [search]);
+  }, [search, skip]);
 
   const handleSubmit = (e, fetchData) => {
     e.preventDefault();
     try {
-      const fetchData = async () => {
-        const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": true,
-            },
-          }
-        );
-        setCharacters(response.data.results);
-        setIsLoading(false);
-      };
       fetchData();
     } catch (error) {
       console.log(error);
@@ -88,10 +73,11 @@ const Characters = (props) => {
         />
         <input type="submit" value="Search" />
       </form>
-
+      <Pagination setSkip={setSkip} currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} />
       <div className="containe-card">
         {characters.map((character) => {
           return (
+            <Link to={`/character/${character._id}`}>
             <Card
               key={character._id}
               id={character._id}
@@ -101,6 +87,7 @@ const Characters = (props) => {
               setFavoritesComics={setFavoritesCharacters}
               objFav={{ favoritesCharacters: character._id }}
             />
+            </Link>
           );
         })}
       </div>
