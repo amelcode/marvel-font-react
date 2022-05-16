@@ -14,7 +14,7 @@ const Characters = (props) => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}`,
+      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
       {
         headers: {
           "Access-Control-Allow-Origin": true,
@@ -29,7 +29,7 @@ const Characters = (props) => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}`,
+          `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
           {
             headers: {
               "Access-Control-Allow-Origin": true,
@@ -67,7 +67,7 @@ const Characters = (props) => {
   };
 
   return isLoading ? (
-   <Loading/>
+    <Loading />
   ) : (
     <div className="page-characters">
       <h1>Character</h1>
