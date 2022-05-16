@@ -182,14 +182,26 @@ h1 {
   margin: 0 auto;
   display: block;
 }
-.page-not-found h2{
+.page-not-found h2 {
   text-align: center;
   font-size: 2rem;
   margin: 1rem 0;
 }
-.page-not-found p{
+.page-not-found p {
   text-align: center;
   font-size: 1.1rem;
   margin: 0 1rem;
-
+}
+@media screen and (max-width: 768px) {
+  .page-login,
+  .page-register {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+  }
+  .page-login-block-image,
+  .page-register-block-image {
+    display: none;
+  }
 }
