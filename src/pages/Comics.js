@@ -66,10 +66,9 @@ const Comics = () => {
           onChange={(e) => {
             e.preventDefault();
             setSearch(e.target.value);
-            console.log("search", search);
           }}
         />
-        <input type="submit" value="search" />
+        <input type="submit" value="Search" />
       </form>      
       <Pagination setSkip={setSkip} currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} />
       <div className="containe-card">

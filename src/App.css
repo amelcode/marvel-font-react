@@ -226,7 +226,10 @@ h1 {
   border-bottom-right-radius: 0.4rem;
   border-bottom-left-radius: 0.4rem;
 }
-
+.pagination {
+  display: flex;
+  justify-content: center;
+}
 @media screen and (max-width: 768px) {
   .page-login,
   .page-register {
