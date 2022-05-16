@@ -21,6 +21,7 @@ export default function Login({ setToken }) {
 
   const submission = async (e) => {
     e.preventDefault();
+    console.log(e.target)
     try {
       const response = await axios.post(
         "https://marvel-back-express.herokuapp.com/login",
@@ -29,6 +30,7 @@ export default function Login({ setToken }) {
           password: password,
         }
       );
+      
       Cookie.set("marvel-user-token", response.data.token);
       setToken(response.data.token);
 
@@ -63,9 +65,7 @@ export default function Login({ setToken }) {
           />
           <input type="submit" value="Login" />
         </form>
-        <Link className="form-user-link" to="/register">
-          No account yet? <br/><span>Register yourself !</span>
-        </Link>
+        <Link className="form-user-link" to="/register">No account yet? Register yourself !</Link>
       </div>
     </div>
   );
