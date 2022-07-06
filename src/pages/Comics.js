@@ -83,6 +83,9 @@ const Comics = () => {
               imageExtension={comic.thumbnail.extension}
               setFavoritesComics={setFavoritesComics}
               objFav={{ favoritesComics: comic.title }}
+              dataElement={comic}
+              nameElement="comic"
+
             />
           );
         })}

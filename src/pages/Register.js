@@ -100,7 +100,9 @@ export default function Signup({ setToken }) {
           <input type="submit" name="submit" value="Register" />
         </form>
         <Link className="form-user-link" to="/login">
-          Already have an account?<br/><span>Connect yourself !</span>
+          Already have an account?
+          <br />
+          <span>Connect yourself !</span>
         </Link>
       </div>
     </div>

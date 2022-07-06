@@ -10,7 +10,8 @@ const Card = ({
   imageLink,
   imageExtension,
   setFavoritesComics,
-  objFav,
+  nameElement,
+  dataElement,
 }) => {
   //Pour mettre que l'élément est en favorie et qu'il ne puisse plus l'etre mais implique de récupérer les données de bdd et de les mettre dans le state de l'app pour ensuite a l'affichage indiquer ceux qui sont en fav et ceux qui ne le sont pas
 
@@ -19,18 +20,20 @@ const Card = ({
   const tokenExists = Cookies.get("marvel-user-token")
     ? Cookies.get("marvel-user-token")
     : false;
-
   const regiterFavorites = async (token, favorites) => {
+    // console.log('favorites', favorites);
     const response = await axios.put(
       `https://marvel-back-express.herokuapp.com/addFavorits`,
       {
         token: token,
-        favorites,
+        categories: nameElement,
+        data : favorites,
       }
-    );
-    console.log("response", response);
+      );
+    console.log("response card", response);
     setIsFavorite(true);
     setFavoritesMessage(response.data.message);
+    // console.log('favorites', favorites);
   };
 
   return (
@@ -47,7 +50,7 @@ const Card = ({
       />
 
       <div className="card-description">
-        <p>{description}</p>{" "}
+        <p>{description}</p>
       </div>
       <div
         className={
@@ -61,8 +64,8 @@ const Card = ({
         className={tokenExists ? "card-favorites" : "card-favorites-disabled"}
         onClick={(e) => {
           e.preventDefault();
-          setFavoritesComics(name);
-          regiterFavorites(tokenExists, objFav);
+          setFavoritesComics(dataElement);
+          regiterFavorites(tokenExists, dataElement);
         }}
       >
         {isFavorite ? favoritesMessage : "Add Favorite"}

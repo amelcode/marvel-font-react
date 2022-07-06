@@ -56,32 +56,37 @@ const Character = () => {
           }
           alt={dataCharacter.name}
         />
-        <p>{dataCharacter.description ? dataCharacter.description : "no description"}</p>
+        <p>
+          {dataCharacter.description
+            ? dataCharacter.description
+            : "no description"}
+        </p>
       </div>
       <div className="characterAppears">
-      <h2>Comics where character appears</h2>
-      <div>
-      {dataComics.map((comic) => {
-        console.log("comic", comic);
+        <h2>Comics where character appears</h2>
+        <div>
+          {dataComics.map((comic) => {
+            console.log("comic", comic);
 
-        return (
-          <div key={comic._id} className="comicWereCharacterAppears card">
-            <h2>{comic.title}</h2>
+            return (
+              <div key={comic._id} className="comicWereCharacterAppears card">
+                <h2>{comic.title}</h2>
 
-            <img
-          src={
-            comic.thumbnail.path.includes("image_not_available") ||
-            comic.thumbnail.path ===
-              "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708"
-              ? imageAvailable
-              : `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`
-          }
-          alt={comic.title}
-        />
-          </div>
-        );
-      })}
-      </div></div>
+                <img
+                  src={
+                    comic.thumbnail.path.includes("image_not_available") ||
+                    comic.thumbnail.path ===
+                      "http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708"
+                      ? imageAvailable
+                      : `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`
+                  }
+                  alt={comic.title}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 };

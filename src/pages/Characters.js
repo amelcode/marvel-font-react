@@ -6,7 +6,6 @@ import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
 import { Link } from "react-router-dom";
 
-
 const Characters = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState(null);
@@ -17,17 +16,17 @@ const Characters = (props) => {
   const [countData, setCountData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const fetchData = async () => {
     const response = await axios.get(
+      // `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
       `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
       {
         headers: {
           "Access-Control-Allow-Origin": true,
         },
       }
-      );
-      console.log('response chara', response);
+    );
+    console.log("response chara", response);
     setCharacters(response.data.results);
     setCountData(response.data.count);
     setIsLoading(false);
@@ -73,20 +72,30 @@ const Characters = (props) => {
         />
         <input type="submit" value="Search" />
       </form>
-      <Pagination setSkip={setSkip} currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} />
+      <Pagination
+        setSkip={setSkip}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        countData={countData}
+      />
       <div className="containe-card">
         {characters.map((character) => {
+          {
+            /* console.log('character', character); */
+          }
+
           return (
             <Link to={`/character/${character._id}`}>
-            <Card
-              key={character._id}
-              id={character._id}
-              name={character.name}
-              imageLink={character.thumbnail.path}
-              imageExtension={character.thumbnail.extension}
-              setFavoritesComics={setFavoritesCharacters}
-              objFav={{ favoritesCharacters: character._id }}
-            />
+              <Card
+                key={character._id}
+                id={character._id}
+                name={character.name}
+                imageLink={character.thumbnail.path}
+                imageExtension={character.thumbnail.extension}
+                setFavoritesComics={setFavoritesCharacters}
+                dataElement={character}
+                nameElement="character"
+              />
             </Link>
           );
         })}

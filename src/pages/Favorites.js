@@ -1,66 +1,26 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Loading from "../components/Loading";
-import Cookie from "js-cookie";
+import { Link } from "react-router-dom";
 
-const Favorites = ({ token }) => {
+import Loading from "../components/Loading";
+import Card from "../components/Card";
+
+const Favorites = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [noFavorite, setNoFavorite] = useState(false);
   const [favoritesComics, setFavoritesComics] = useState(null);
   const [favoritesCharacters, setFavoritesCharacters] = useState(null);
 
-  // const fetchData = async () => {
-
-  //   const response = await axios.get(
-  //     `https://marvel-back-express.herokuapp.com/favorites`,
-  //     {headers: {
-  //       'Access-Control-Allow-Origin': false,
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     },}
-  //   );
-  //   setIsLoading(false);
-  //   setFavoritesComics(response.data.comics);
-  //   setFavoritesCharacters(response.data.characters);
-  // };
-
-  // const fetchDataComics = async (title) => {
-  //   const response = await axios.get(
-  //     `https://marvel-back-express.herokuapp.com/comics?title=${title}`,
-  //     {headers: {
-  //       'Access-Control-Allow-Origin': true,
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     },}
-  //   );
-
-  //   console.log("response fetchDataComics", response);
-  //   console.log("response fetchDataComics", response.data);
-  //   // setComics(response.data.results);
-  //   // setCountData(response.data.count);
-  //   setIsLoading(false);
-  //   // console.log('countData', countData);
-  // };
-  const fetchDataCharacters = async (id) => {
-    const response = await axios.get(
-      `https://marvel-back-express.herokuapp.com/comics/${id}`,
-      {headers: {
-        'Access-Control-Allow-Origin': true,
-        headers: { Authorization: `Bearer ${token}` }
-      },}
-    );
-
-    console.log("response fetchDataComics", response);
-    console.log("response fetchDataComics", response.data);
-    // setComics(response.data.results);
-    // setCountData(response.data.count);
-    setIsLoading(false);
-    // console.log('countData', countData);
-  };
   useEffect(() => {
     try {
       const token = Cookies.get("marvel-user-token");
+      setNoFavorite(false);
+
       if (token) {
         const fetchData = async () => {
           const response = await axios.get(
+            // `https://marvel-back-express.herokuapp.com/favorites`,
             `https://marvel-back-express.herokuapp.com/favorites`,
             {
               headers: {
@@ -69,14 +29,22 @@ const Favorites = ({ token }) => {
               },
             }
           );
-          console.log("response", response);
+
+          console.log("response fAV", response.data);
+          console.log("response.data.comics", response.data.comics);
+          console.log("response.data.characters", response.data.characters);
+          if (response.data.error) {
+            setNoFavorite(true);
+          } else {
+            setFavoritesComics(response.data.comics);
+            setFavoritesCharacters(response.data.characters);
+          }
           setIsLoading(false);
-          setFavoritesComics(response.data.comics);
-          setFavoritesCharacters(response.data.characters);
+          console.log("favoritesCharacters", favoritesCharacters);
+
+          console.log("favoritesComics", favoritesComics);
         };
         fetchData();
-
-        // console.log("favoritesComics", favoritesComics);
       }
     } catch (error) {
       console.log(error);
@@ -97,31 +65,101 @@ const Favorites = ({ token }) => {
 
   return isLoading ? (
     <Loading />
+  ) : noFavorite ? (
+    <h1>No favorites</h1>
   ) : (
     <div className="page-favorites">
       <h1>Your favorites</h1>
       <h2>Comics</h2>
-      {favoritesComics.map((title) => {
-        console.log('title', title);
-        
-        {/* fetchDataComics(title); */}
-        return (
-          <div key={title}>
-            <p>{title}</p>
-          </div>
-        );
-      })}
+      <div className="containe-card">
+        {favoritesComics.map((comic) => {
+          return (
+            <div key={comic.id}>
+              <Card
+                key={comic._id}
+                id={comic._id}
+                nameElement="comic"
+                name={comic.title}
+                imageLink={comic.thumbnail.path}
+                imageExtension={comic.thumbnail.extension}
+                dataCara={comic}
+              />
+            </div>
+          );
+        })}
+      </div>
       <h2>Characters</h2>
-      {favoritesCharacters.map((characterId) => {
-        fetchDataCharacters(characterId);
-        return (
-          <div key={characterId}>
-            <p>{characterId}</p>
-          </div>
-        );
-      })}
+      <div className="containe-card">
+        {favoritesCharacters.map((character) => {
+          return (
+            <div key={character.id}>
+              <Link to={`/character/${character._id}`}>
+                <Card
+                  key={character._id}
+                  id={character._id}
+                  nameElement="character"
+                  name={character.name}
+                  imageLink={character.thumbnail.path}
+                  imageExtension={character.thumbnail.extension}
+                  dataCara={character}
+                />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
 export default Favorites;
+
+// const fetchData = async () => {
+
+//   const response = await axios.get(
+//     `https://marvel-back-express.herokuapp.com/favorites`,
+//     {headers: {
+//       'Access-Control-Allow-Origin': false,
+//       headers: { Authorization: `Bearer ${token}` }
+//     },}
+//   );
+//   setIsLoading(false);
+//   setFavoritesComics(response.data.comics);
+//   setFavoritesCharacters(response.data.characters);
+// };
+
+// const fetchDataComics = async (title) => {
+//   const response = await axios.get(
+//     `https://marvel-back-express.herokuapp.com/comics?title=${title}`,
+//     {headers: {
+//       'Access-Control-Allow-Origin': true,
+//       headers: { Authorization: `Bearer ${token}` }
+//     },}
+//   );
+
+//   console.log("response fetchDataComics", response);
+//   console.log("response fetchDataComics", response.data);
+//   // setComics(response.data.results);
+//   // setCountData(response.data.count);
+//   setIsLoading(false);
+//   // console.log('countData', countData);
+// };
+
+// const fetchDataCharacters = async (id) => {
+//   const response = await axios.get(
+//     `https://marvel-back-express.herokuapp.com/comics/${id}`,
+//     {
+//       headers: {
+//         "Access-Control-Allow-Origin": true,
+//         headers: { Authorization: `Bearer ${token}` },
+//       },
+//     }
+//   );
+
+//   console.log("response fetchDataComics", response);
+//   console.log("response fetchDataComics", response.data);
+//   // setComics(response.data.results);
+//   // setCountData(response.data.count);
+//   setIsLoading(false);
+//   // console.log('countData', countData);
+// };
