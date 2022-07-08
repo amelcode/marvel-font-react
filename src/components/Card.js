@@ -20,20 +20,21 @@ const Card = ({
   const tokenExists = Cookies.get("marvel-user-token")
     ? Cookies.get("marvel-user-token")
     : false;
+
   const regiterFavorites = async (token, favorites) => {
-    // console.log('favorites', favorites);
+    console.log("favorites", favorites);
     const response = await axios.put(
-      `https://marvel-back-express.herokuapp.com/addFavorits`,
+      `https://marvel-back-express.herokuapp.com/addFavorit`,
       {
         token: token,
         categories: nameElement,
-        data : favorites,
+        data: favorites,
       }
-      );
+    );
     console.log("response card", response);
     setIsFavorite(true);
     setFavoritesMessage(response.data.message);
-    // console.log('favorites', favorites);
+    console.log("favorites", favorites);
   };
 
   return (
@@ -64,11 +65,13 @@ const Card = ({
         className={tokenExists ? "card-favorites" : "card-favorites-disabled"}
         onClick={(e) => {
           e.preventDefault();
-          setFavoritesComics(dataElement);
+          console.log("click");
+          // setFavoritesComics(dataElement);
           regiterFavorites(tokenExists, dataElement);
+          console.log("tokenExists", tokenExists);
         }}
       >
-        {isFavorite ? favoritesMessage : "Add Favorite"}
+        {isFavorite ? "favoritesMessage" : "Add Favorite"}
       </button>
       <div className="card-favorites-message"></div>
     </div>

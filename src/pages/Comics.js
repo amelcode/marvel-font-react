@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [comics, setComics] = useState(null);
-  console.log('comics', comics);
+  // console.log("comics", comics);
   const [search, setSearch] = useState("");
   const [favoritesComics, setFavoritesComics] = useState("");
 
@@ -17,14 +17,14 @@ const Comics = () => {
   const [countData, setCountData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const fetchData = async () => {
-
     const response = await axios.get(
       `https://marvel-back-express.herokuapp.com/comics?skip=${skip}&title=${search}`,
-      {headers: {
-        'Access-Control-Allow-Origin': true,
-      },}
+      {
+        headers: {
+          "Access-Control-Allow-Origin": true,
+        },
+      }
     );
     setComics(response.data.results);
     setCountData(response.data.count);
@@ -49,8 +49,8 @@ const Comics = () => {
   };
 
   return isLoading ? (
-    <Loading/>
-    ) : (
+    <Loading />
+  ) : (
     <div className="page-comics">
       <h1>Comics</h1>
 
@@ -69,8 +69,13 @@ const Comics = () => {
           }}
         />
         <input type="submit" value="Search" />
-      </form>      
-      <Pagination setSkip={setSkip} currentPage={currentPage} setCurrentPage={setCurrentPage} countData={countData} />
+      </form>
+      <Pagination
+        setSkip={setSkip}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        countData={countData}
+      />
       <div className="containe-card">
         {comics.map((comic) => {
           return (
@@ -78,14 +83,12 @@ const Comics = () => {
               key={comic._id}
               id={comic._id}
               name={comic.title}
-              // description={comic.description}
               imageLink={comic.thumbnail.path}
               imageExtension={comic.thumbnail.extension}
               setFavoritesComics={setFavoritesComics}
               objFav={{ favoritesComics: comic.title }}
               dataElement={comic}
               nameElement="comic"
-
             />
           );
         })}

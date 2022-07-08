@@ -21,7 +21,7 @@ const Favorites = () => {
         const fetchData = async () => {
           const response = await axios.get(
             // `https://marvel-back-express.herokuapp.com/favorites`,
-            `http://localhost:3200/favorites`,
+            `https://marvel-back-express.herokuapp.com/favorites`,
             {
               headers: {
                 "Access-Control-Allow-Origin": true,
@@ -72,7 +72,7 @@ const Favorites = () => {
       <h1>Your favorites</h1>
       <h2>Comics</h2>
       <div className="containe-card">
-        {favoritesComics?.map((comic) => {
+        {favoritesComics.map((comic) => {
           return (
             <div key={comic.id}>
               <Card
@@ -90,7 +90,7 @@ const Favorites = () => {
       </div>
       <h2>Characters</h2>
       <div className="containe-card">
-        {favoritesCharacters?.map((character) => {
+        {favoritesCharacters.map((character) => {
           return (
             <div key={character.id}>
               <Link to={`/character/${character._id}`}>
