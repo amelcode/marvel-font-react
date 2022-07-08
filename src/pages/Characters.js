@@ -6,7 +6,8 @@ import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
 import { Link } from "react-router-dom";
 
-const Characters = (props) => {
+// cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
+const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState(null);
   const [search, setSearch] = useState("");
@@ -87,6 +88,9 @@ const Characters = (props) => {
           return (
             <Link to={`/character/${character._id}`}>
               <Card
+                cookieFavorites={cookieFavorites}
+                setCookieFavorites={setCookieFavorites}
+                token={token}
                 key={character._id}
                 id={character._id}
                 name={character.name}

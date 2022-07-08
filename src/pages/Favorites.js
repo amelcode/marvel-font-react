@@ -14,7 +14,7 @@ const Favorites = () => {
 
   useEffect(() => {
     try {
-      const token = Cookies.get("marvel-user-token");
+      const token = Cookies.get("marvel-user-data");
       setNoFavorite(false);
 
       if (token) {

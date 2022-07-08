@@ -31,7 +31,9 @@ export default function Login({ setToken }) {
         }
       );
 
-      Cookie.set("marvel-user-token", response.data.token);
+      const userData = JSON.stringify(response.data);
+
+      Cookie.set("marvel-user-data", userData);
       setToken(response.data.token);
 
       navigate("/");

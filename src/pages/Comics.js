@@ -6,7 +6,9 @@ import Loading from "../components/Loading";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Comics = () => {
+// cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
+
+const Comics = ({ token, cookieFavorites, setCookieFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [comics, setComics] = useState(null);
   // console.log("comics", comics);
@@ -80,6 +82,7 @@ const Comics = () => {
         {comics.map((comic) => {
           return (
             <Card
+              token={token}
               key={comic._id}
               id={comic._id}
               name={comic.title}

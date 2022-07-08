@@ -3,7 +3,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import "./card.css";
 import imageAvailable from "../asset/images/image_not_available.png";
+
+// cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
+
 const Card = ({
+  token,
+  cookieFavorites,
+  setCookieFavorites,
   id,
   name,
   description,
@@ -17,9 +23,7 @@ const Card = ({
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoritesMessage, setFavoritesMessage] = useState("");
-  const tokenExists = Cookies.get("marvel-user-token")
-    ? Cookies.get("marvel-user-token")
-    : false;
+  const tokenExists = token ? token : false;
 
   const regiterFavorites = async (token, favorites) => {
     console.log("favorites", favorites);

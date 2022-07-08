@@ -48,7 +48,10 @@ export default function Signup({ setToken }) {
         }
       );
 
-      Cookie.set("marvel-user-token", response.data.token);
+      console.log("response", response);
+      const userData = JSON.stringify(response.data);
+
+      Cookie.set("marvel-user-data", userData);
       setToken(response.data.token);
       /* It redirects the user to the home page. */
       navigate("/");
