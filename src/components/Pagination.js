@@ -1,5 +1,5 @@
-const Pagination = ({ setSkip, currentPage, setCurrentPage, countData }) => {
-  let skipNumber = currentPage * 100;
+const Pagination = ({ setSkip, currentPage, setCurrentPage, countData, limit }) => {
+  let skipNumber = currentPage * limit;
 
   return (
     <div className="pagination">
@@ -17,7 +17,7 @@ const Pagination = ({ setSkip, currentPage, setCurrentPage, countData }) => {
       <button value={Number(currentPage)}>{Number(currentPage)}</button>
       
       <button
-        disabled={currentPage * 100 >= countData && true}
+        disabled={currentPage * limit >= countData && true}
         value={Number(currentPage) + 1}
         onClick={(e) => {
           setCurrentPage(currentPage + 1);

@@ -4,12 +4,12 @@ import Cookies from "js-cookie";
 import "./card.css";
 import imageAvailable from "../asset/images/image_not_available.png";
 
-// cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
+// userFavorites={userFavorites} setUserFavorites={setUserFavorites}
 
 const Card = ({
   token,
-  cookieFavorites,
-  setCookieFavorites,
+  userFavorites,
+  setUserFavorites,
   id,
   name,
   description,
@@ -27,44 +27,50 @@ const Card = ({
 
   const regiterFavorites = async (token, favorites) => {
     try {
-      console.log("favorites", favorites);
-      // const cookieFavorites = { ...cookieFavorites };
-      // console.log('cookieFavorites', cookieFavorites);
-      console.log("cookieFavorites", cookieFavorites);
-
-      if (cookieFavorites[nameElement].length === 0) {
-        cookieFavorites[nameElement].push(favorites);
-      } else if (cookieFavorites[nameElement].length !== 0) {
+      if (userFavorites[nameElement].length === 0) {
+        userFavorites[nameElement].push(favorites);
+      } else if (userFavorites[nameElement].length !== 0) {
         let existInFav = false;
-        cookieFavorites[nameElement].map((item) => {
+        userFavorites[nameElement].map((item, index) => {
           if (item._id === favorites._id) {
-            existInFav = true;
+            existInFav = index;
           }
         });
 
+        if (existInFav) {
+          console.log(existInFav);
+          delete userFavorites[nameElement][existInFav];
+          const response = await axios.put(
+            `https://marvel-back-express.herokuapp.com/addFavorit`,
+            {
+              token: token,
+              categories: nameElement,
+              data: userFavorites[nameElement],
+            }
+          );
+          setUserFavorites(response.data);
+          console.log("response card", response);
+          setIsFavorite(false);
+        }
         if (!existInFav) {
-          cookieFavorites[nameElement].push(favorites);
+          userFavorites[nameElement].push(favorites);
+          console.log("userFavorites", userFavorites);
+          const response = await axios.put(
+            `https://marvel-back-express.herokuapp.com/addFavorit`,
+            {
+              token: token,
+              categories: nameElement,
+              data: favorites,
+            }
+          );
+
+          // Cookies.set("marvel-user-data", response.data);
+          setUserFavorites(response.data);
+          console.log("response card", response);
+          setIsFavorite(true);
+          // setIsFavorite(!isFavorite);
         }
       }
-      console.log("cookieFavorites", cookieFavorites);
-      const newCookieValue = JSON.stringify({
-        token: token,
-        favorites: cookieFavorites,
-      });
-      console.log("newCookieValue", newCookieValue);
-      Cookies.set("marvel-user-data", newCookieValue);
-      setCookieFavorites(cookieFavorites);
-
-      const response = await axios.put(
-        `https://marvel-back-express.herokuapp.com/addFavorit`,
-        {
-          token: token,
-          categories: nameElement,
-          data: favorites,
-        }
-      );
-      console.log("response card", response);
-      setIsFavorite(true);
     } catch (error) {
       console.log(error);
     }
@@ -102,11 +108,7 @@ const Card = ({
         alt={name}
       />
       <div className="card-description"></div>
-      <div
-        className={
-          tokenExists ? "card-title" : "card-title, card-title-no-token"
-        }
-      >
+      <div className="card-title">
         <h2>{name}</h2>
       </div>
     </div>

@@ -25,7 +25,8 @@ function App() {
     JSON.parse(Cookies.get("marvel-user-data"));
   const [token, setToken] = useState(cookieData?.token || null);
   // console.log("token", token);
-  const [cookieFavorites, setCookieFavorites] = useState(cookieData?.favorites);
+  const [userFavorites, setUserFavorites] = useState(null);
+  console.log("userFavorites", userFavorites);
 
   return (
     <div className="App">
@@ -35,7 +36,7 @@ function App() {
             <Link to="/">
               <img src={logo} alt="marvel logo" className="App-logo" />
             </Link>
-            <div className="App-user-navigation">
+           {/* <div className="App-user-navigation">
               {token ? (
                 <button
                   onClick={() => {
@@ -46,19 +47,19 @@ function App() {
                   Logout
                 </button>
               ) : (
-                <>
+                 <>
                   <Link to="/register">Register</Link>
                   <Link to="/login">Login</Link>
-                </>
+                </> 
               )}
-            </div>
+            </div>*/}
           </nav>
 
           <nav className="App-nav App-nav-second">
             <Link to="/">Home</Link>
             <Link to="/comics">Comics</Link>
             <Link to="/characters">Character</Link>
-            {token && <Link to="/favorites">Favorites</Link>}
+            {/* {token && <Link to="/favorites">Favorites</Link>} */}
           </nav>
         </header>
         <Routes>
@@ -68,8 +69,8 @@ function App() {
             element={
               <Comics
                 token={token}
-                cookieFavorites={cookieFavorites}
-                setCookieFavorites={setCookieFavorites}
+                userFavorites={userFavorites}
+                setUserFavorites={setUserFavorites}
               />
             }
           />
@@ -78,8 +79,8 @@ function App() {
             element={
               <Characters
                 token={token}
-                cookieFavorites={cookieFavorites}
-                setCookieFavorites={setCookieFavorites}
+                userFavorites={userFavorites}
+                setUserFavorites={setUserFavorites}
               />
             }
           />
@@ -89,15 +90,20 @@ function App() {
           />
 
           <Route path="/register" element={<Register setToken={setToken} />} />
-          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route
+            path="/login"
+            element={
+              <Login setToken={setToken} setUserFavorites={setUserFavorites} />
+            }
+          />
           <Route path="/profile" element={<Profile token={token} />} />
           <Route
             path="/favorites"
             element={
               <Favorites
                 token={token}
-                cookieFavorites={cookieFavorites}
-                setCookieFavorites={setCookieFavorites}
+                userFavorites={userFavorites}
+                setUserFavorites={setUserFavorites}
               />
             }
           />

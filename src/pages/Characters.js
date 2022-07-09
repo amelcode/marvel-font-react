@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
+import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
-const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
-  console.log("cookieFavorites", cookieFavorites);
+// userFavorites={userFavorites} setUserFavorites={setUserFavorites}
+const Characters = ({ token, userFavorites, setUserFavorites }) => {
+  // console.log("userFavorites", userFavorites);
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState(null);
   const [search, setSearch] = useState("");
@@ -17,13 +17,14 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const [skip, setSkip] = useState(0);
+  const [limit, setlimit] = useState(100);
+
   const [countData, setCountData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   const fetchData = async () => {
     const response = await axios.get(
-      // `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
-      `https://marvel-back-express.herokuapp.com/characters?skip=${skip}&name=${search}`,
+      `https://marvel-back-express.herokuapp.com/characters?limit=${limit}&skip=${skip}&name=${search}`,
       {
         headers: {
           "Access-Control-Allow-Origin": true,
@@ -35,7 +36,6 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
     setCountData(response.data.count);
     setIsLoading(false);
   };
-  const limitComics = 100;
 
   useEffect(() => {
     try {
@@ -43,7 +43,11 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [search, skip]);
+  }, [search, skip, limit]);
+
+  const changeLimit = (e) => {
+    setlimit(e.target.value);
+  };
 
   const handleSubmit = (e, fetchData) => {
     e.preventDefault();
@@ -59,72 +63,60 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
   ) : (
     <div className="page-characters">
       <h1>Character</h1>
-      <form className="form-search" onSubmit={handleSubmit}>
-        <div>
-          <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-        </div>
-        <input
-          type="search"
-          name="search"
-          id="search"
-          value={search}
-          onChange={(e) => {
-            e.preventDefault();
-            setSearch(e.target.value);
-            console.log("search", search);
-          }}
+      <div className="elementChangeSee">
+        <form className="form-search" onSubmit={handleSubmit}>
+          <div>
+            <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+          </div>
+          <input
+            type="search"
+            name="search"
+            id="search"
+            value={search}
+            onChange={(e) => {
+              e.preventDefault();
+              setSearch(e.target.value);
+              console.log("search", search);
+            }}
+          />
+          <input type="submit" value="Search" />
+        </form>
+
+        <Pagination
+          setSkip={setSkip}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          countData={countData}
         />
-        <input type="submit" value="Search" />
-      </form>
-      <Pagination
-        setSkip={setSkip}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        countData={countData}
-      />
+        <select name="limit" id="limit" onChange={changeLimit}>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="75">75</option>
+          <option value="100" selected>
+            100
+          </option>
+        </select>
+      </div>
       <div className="containe-card">
         {characters.map((character) => {
           let existInFav = false;
 
           if (token) {
-            {
-              /* console.log("cookieFavorites", cookieFavorites);
-
-            console.log("character", character); */
-            }
-
-            //isFavorite, setIsFavorite
-
-            if (cookieFavorites.characters.length !== 0) {
-              cookieFavorites.characters.map((item) => {
+            if (userFavorites.characters.length !== 0) {
+              userFavorites.characters.map((item) => {
                 if (item._id === character._id) {
                   existInFav = true;
                 }
               });
               console.log("existInFav", existInFav);
-              {
-                /* 
-        if (!existInFav) {
-          cookieFavorites.characters.push(favorites);
-        }
-      }
-      console.log("cookieFavorites", cookieFavorites);
-      const newCookieValue = JSON.stringify({
-        token: token,
-        favorites: cookieFavorites,
-      });
-      console.log("newCookieValue", newCookieValue);
-      Cookies.set("marvel-user-data", newCookieValue);
-      setCookieFavorites(cookieFavorites); **/
-              }
             }
           }
 
           return (
             <Link to={`/character/${character._id}`}>
               <Card
-                cookieFavorites={cookieFavorites}
-                setCookieFavorites={setCookieFavorites}
+                userFavorites={userFavorites}
+                setUserFavorites={setUserFavorites}
                 token={token}
                 key={character._id}
                 id={character._id}

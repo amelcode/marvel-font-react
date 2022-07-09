@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-export default function Login({ setToken }) {
+export default function Login({ setToken, setUserFavorites }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -32,6 +32,7 @@ export default function Login({ setToken }) {
       );
 
       console.log("response", response);
+      setUserFavorites(response.data.favorites);
       const userData = JSON.stringify(response.data);
       console.log("userData", userData);
 

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Card from "../components/Card";
 
-const Favorites = ({ token, cookieFavorites, setCookieFavorites }) => {
+const Favorites = ({ token, userFavorites, setUserFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [noFavorite, setNoFavorite] = useState(false);
   const [favoritesComics, setFavoritesComics] = useState(null);
