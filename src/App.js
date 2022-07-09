@@ -20,14 +20,12 @@ import NotFound from "./pages/NotFound";
 library.add(faMagnifyingGlass);
 
 function App() {
-  const cookieData = Cookies.get("marvel-user-data") && JSON.parse(Cookies.get("marvel-user-data"))
-  const [token, setToken] = useState(
-    cookieData?.token || null
-  );
+  const cookieData =
+    Cookies.get("marvel-user-data") &&
+    JSON.parse(Cookies.get("marvel-user-data"));
+  const [token, setToken] = useState(cookieData?.token || null);
   // console.log("token", token);
-  const [cookieFavorites, setCookieFavorites] = useState(
-    cookieData?.favorites || null
-  );
+  const [cookieFavorites, setCookieFavorites] = useState(cookieData?.favorites);
 
   return (
     <div className="App">

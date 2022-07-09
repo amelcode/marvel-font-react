@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
@@ -31,9 +31,11 @@ export default function Login({ setToken }) {
         }
       );
 
+      console.log("response", response);
       const userData = JSON.stringify(response.data);
+      console.log("userData", userData);
 
-      Cookie.set("marvel-user-data", userData);
+      Cookies.set("marvel-user-data", userData);
       setToken(response.data.token);
 
       navigate("/");

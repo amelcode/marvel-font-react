@@ -8,10 +8,13 @@ import { Link } from "react-router-dom";
 
 // cookieFavorites={cookieFavorites} setCookieFavorites={setCookieFavorites}
 const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
+  console.log("cookieFavorites", cookieFavorites);
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState(null);
   const [search, setSearch] = useState("");
   const [favoritesCharacters, setFavoritesCharacters] = useState("");
+
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const [skip, setSkip] = useState(0);
   const [countData, setCountData] = useState(null);
@@ -27,7 +30,7 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
         },
       }
     );
-    console.log("response chara", response);
+    // console.log("response chara", response);
     setCharacters(response.data.results);
     setCountData(response.data.count);
     setIsLoading(false);
@@ -81,8 +84,40 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
       />
       <div className="containe-card">
         {characters.map((character) => {
-          {
-            /* console.log('character', character); */
+          let existInFav = false;
+
+          if (token) {
+            {
+              /* console.log("cookieFavorites", cookieFavorites);
+
+            console.log("character", character); */
+            }
+
+            //isFavorite, setIsFavorite
+
+            if (cookieFavorites.characters.length !== 0) {
+              cookieFavorites.characters.map((item) => {
+                if (item._id === character._id) {
+                  existInFav = true;
+                }
+              });
+              console.log("existInFav", existInFav);
+              {
+                /* 
+        if (!existInFav) {
+          cookieFavorites.characters.push(favorites);
+        }
+      }
+      console.log("cookieFavorites", cookieFavorites);
+      const newCookieValue = JSON.stringify({
+        token: token,
+        favorites: cookieFavorites,
+      });
+      console.log("newCookieValue", newCookieValue);
+      Cookies.set("marvel-user-data", newCookieValue);
+      setCookieFavorites(cookieFavorites); **/
+              }
+            }
           }
 
           return (
@@ -98,7 +133,9 @@ const Characters = ({ token, cookieFavorites, setCookieFavorites }) => {
                 imageExtension={character.thumbnail.extension}
                 setFavoritesComics={setFavoritesCharacters}
                 dataElement={character}
-                nameElement="character"
+                nameElement="characters"
+                isFavorite={existInFav}
+                setIsFavorite={setIsFavorite}
               />
             </Link>
           );

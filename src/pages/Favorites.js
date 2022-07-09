@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Card from "../components/Card";
 
-const Favorites = () => {
+const Favorites = ({ token, cookieFavorites, setCookieFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [noFavorite, setNoFavorite] = useState(false);
   const [favoritesComics, setFavoritesComics] = useState(null);
@@ -14,13 +14,12 @@ const Favorites = () => {
 
   useEffect(() => {
     try {
-      const token = Cookies.get("marvel-user-data");
+      // const token = Cookies.get("marvel-user-data");
       setNoFavorite(false);
 
       if (token) {
         const fetchData = async () => {
           const response = await axios.get(
-            // `https://marvel-back-express.herokuapp.com/favorites`,
             `https://marvel-back-express.herokuapp.com/favorites`,
             {
               headers: {
